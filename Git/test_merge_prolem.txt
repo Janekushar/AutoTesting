@@ -22,4 +22,3 @@ I want to say
 so many words
 but i should do autotesting.
 something here
-qwerty
