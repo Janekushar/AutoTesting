@@ -1,4 +1,0 @@
-First commit in this lab\n
-
-Second line\n
-Something new
