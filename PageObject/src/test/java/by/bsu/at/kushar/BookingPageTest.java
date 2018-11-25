@@ -52,4 +52,109 @@ public class BookingPageTest {
         form.clickSubmit();
         assertTrue(Arrays.asList(dep.getAttribute("class").split(" ")).contains("error-value"));
     }
+
+    @Test
+    public void sameLocationTest() {
+        form.getDepartureAirport().sendKeys("Aarhus (AAR), Denmark");
+        form.getArrivalAirport().sendKeys("Aarhus (AAR), Denmark");
+        form.oneWay();
+        form.clickCalendar();
+        form.getDate().click();
+        form.clickSubmit();
+        form.disebleTab();
+        String expectedMess = "We couldn't find any available schedules that meet your criteria. " +
+                "Please try with a different search";
+        assertEquals(expectedMess, form.getAlertMessage());
+    }
+
+    @Test
+    public void dateSelectTest() {
+        form.clickSecondCalendar();
+        WebElement secondDate = form.getSecondDate();
+        WebElement firstDate = form.getDate();
+        secondDate.click();
+        firstDate.click();
+        form.clickSecondCalendar();
+        int[] expected = {Integer.valueOf(secondDate.getText()), Integer.valueOf(firstDate.getText())};
+        assertArrayEquals(expected, form.getFligthDates());
+    }
+
+    @Test
+    public void maxValuePassTest() {
+        form.selectPassengers();
+        for (int i = 0; i < 9; i++) {
+            form.addAdult();
+        }
+        int expectedAmount = 9;
+        assertEquals(expectedAmount, form.getAdultAmount());
+
+    }
+
+    @Test
+    public void maxSumValueTest() {
+        form.selectPassengers();
+        for (int i = 0; i < 4; i++) {
+            form.addAdult();
+            form.addChild();
+        }
+        form.addChild();
+        int expectedAmount = 9;
+        assertEquals(expectedAmount, form.getAdultAmount() + form.getChildAmount());
+    }
+
+    @Test
+    public void maxInfantValueTest() {
+        form.selectPassengers();
+        for (int i = 0; i < 4; i++) {
+            form.addAdult();
+            form.addInfant();
+        }
+        int expectedAmount = 3;
+        assertEquals(expectedAmount, form.getInfantAmount());
+    }
+
+    @Test
+    public void infantWithoutAdultTest() {
+        form.selectPassengers();
+        form.addInfant();
+        form.addAdult();
+        form.addInfant();
+        int notExpectedAmount = form.getInfantAmount();
+        form.minusAdult();
+        assertNotEquals(notExpectedAmount, form.getInfantAmount());
+    }
+
+    @Test
+    public void totalPriceTest() {
+        form.getDepartureAirport().sendKeys("Addis Ababa (ADD), Ethiopia");
+        form.getArrivalAirport().sendKeys("Bahar Dar (BJR), Ethiopia");
+        form.oneWay();
+        form.clickCalendar();
+        form.getDate().click();
+        form.clickSubmit();
+        form.setAccept();
+        form.setOffer(0);
+        double notExpectedAmount = form.getTotalPrice();
+        form.changeOrder();
+        form.setOffer(3);
+        assertNotEquals(notExpectedAmount,form.getTotalPrice(),1E-2);
+
+
+    }
+
+    @Test
+    public void finalFormNotEmptyTest() {
+        form.getDepartureAirport().sendKeys("Addis Ababa (ADD), Ethiopia");
+        form.getArrivalAirport().sendKeys("Bahar Dar (BJR), Ethiopia");
+        form.oneWay();
+        form.clickCalendar();
+        form.getDate().click();
+        form.clickSubmit();
+        form.setAccept();
+        form.setOffer(0);
+        form.clickContinue();
+        form.clickContinue();
+        WebElement input = form.getInputField();
+        assertTrue(Arrays.asList(input.getAttribute("class").split(" ")).contains("field-error"));
+    }
 }
