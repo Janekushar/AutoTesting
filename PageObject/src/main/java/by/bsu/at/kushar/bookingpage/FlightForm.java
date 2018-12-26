@@ -1,15 +1,18 @@
 package by.bsu.at.kushar.bookingpage;
 
+import com.sun.imageio.plugins.wbmp.WBMPImageWriter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FlightForm {
     private WebDriver driver;
 
     public FlightForm(WebDriver driver) {
         this.driver = driver;
-
     }
 
     public void disebleTab() {
@@ -51,10 +54,13 @@ public class FlightForm {
     }
 
     public int[] getFligthDates() {
-        return new int[]{Integer.valueOf(driver.findElement(By.xpath("//*[@id=\"book-form\"]" +
-                "/div[2]/ul/li[3]/div/label[1]/label/span[2]")).getText()),
-                Integer.valueOf(driver.findElement(By.xpath("//*[@id=\"book-form\"]" +
-                        "/div[2]/ul/li[3]/div/label[2]/label/span[2]")).getText())};
+        return new int[]{Integer.valueOf(getCurrentDate(1).getText()),
+                Integer.valueOf(getCurrentDate(2).getText())};
+    }
+
+    private WebElement getCurrentDate(int i) {
+        return driver.findElement(By.xpath("//*[@id=\"book-form\"]" +
+                "/div[2]/ul/li[3]/div/label[" + i + "]/label/span[2]"));
     }
 
     public void selectPassengers() {
@@ -99,17 +105,40 @@ public class FlightForm {
     }
 
     public void setOffer(int i) {
-        driver.findElement(By.xpath("//*[@id=\"offer-container-0-" + i + "\"]/button")).click();
-        sleep(1000);
-        driver.findElement(By.xpath("//*[@id=\"dxp-flight-offers-comparison-0-" + i + "\"]" +
-                "/td/table/tbody/tr[7]/td[2]/button")).click();
-        sleep(6000);
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.visibilityOf(getSelectOffer(i)));
+        getSelectOffer(i).click();
     }
 
+    public void clickSelectOffer(int i) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getSelectButton(i).click();
+    }
+
+    private WebElement getSelectOffer(int i) {
+        return driver.findElement(By.xpath("//*[@id=\"offer-container-0-" + i + "\"]/button"));
+    }
+
+    private WebElement getSelectButton(int i) {
+        return driver.findElement(By.xpath("//*[@id=\"dxp-flight-offers-comparison-0-" + i + "\"]" +
+                "/td/table/tbody/tr[7]/td[2]/button"));
+    }
+    //*[@id="dxp-flight-offers-comparison-0-3"]/td/table/tbody/tr[7]/td[2]/button
     public double getTotalPrice() {
+        waitPrice();
         return Double.valueOf(driver.findElement(By.xpath("//*[@id=\"dxp-flight-selection-trip-total-content\"]" +
                 "/div/table/tbody[2]/tr/td[2]/span/div/span/span/span[1]/span"))
                 .getText().replace(',', '.'));
+    }
+
+    public void waitPrice() {
+        new WebDriverWait(driver, 6)
+                .until(ExpectedConditions.visibilityOf(driver
+                        .findElement(By.xpath("//*[@id=\"dxp-flight-selection-trip-total-content\"]/div"))));
     }
 
     public void changeOrder() {
@@ -118,13 +147,17 @@ public class FlightForm {
 
     public void clickContinue() {
         driver.findElement(By.xpath("//*[@id=\"dxp-page-navigation-continue-button\"]")).click();
-        sleep(6000);
     }
 
 
     public void setAccept() {
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions
+                        .visibilityOf(driver.findElement(By.xpath("//*[@id=\"specialFareModal\"]/div/div"))));
         driver.findElement(By.xpath("//*[@id=\"specialFareModal\"]/div/div/div[2]/div[2]/label[1]")).click();
-        sleep(1000);
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.
+                        attributeToBe(By.xpath("//*[@id=\"ethiopian\"]"), "value", "YES"));
         driver.findElement(By.xpath("//*[@id=\"submit-btn\"]")).click();
     }
 
@@ -133,11 +166,9 @@ public class FlightForm {
                 "/div/div[1]/div[2]/div"));
     }
 
-    private void sleep(int s) {
-        try {
-            Thread.sleep(s);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void waitFinalForm() {
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions
+                        .visibilityOf(driver.findElement(By.xpath("//*[@id=\"passenger-item-ADT-1\"]/div[1]"))));
     }
 }

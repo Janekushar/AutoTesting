@@ -5,9 +5,11 @@ import static org.junit.Assert.*;
 
 import by.bsu.at.kushar.bookingpage.FlightForm;
 import by.bsu.at.kushar.homepage.LanguageAndRegion;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -15,24 +17,28 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class BookingPageTest {
-    private WebDriver driver;
-    private FlightForm form;
+    private static WebDriver driver;
+    private static FlightForm form;
 
-    @Before
-    public void setUpChromeDriver() throws Exception {
+    @BeforeClass
+    public static void setUpChromeDriver() throws Exception {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        driver.navigate().to("https://www.ethiopianairlines.com/AA/EN");
         form = new FlightForm(driver);
+        driver.navigate().to("https://www.ethiopianairlines.com/AA/EN");
     }
 
-    @After
-    public void tearDownChromeDriverQuit() {
+    @Before
+    public void setUpUrl() {
+        driver.navigate().to("https://www.ethiopianairlines.com/AA/EN");
+    }
+
+    @AfterClass
+    public static void tearDownChromeDriverQuit() {
         form = null;
         driver.quit();
-        driver = null;
     }
 
     @Test
@@ -125,24 +131,6 @@ public class BookingPageTest {
     }
 
     @Test
-    public void totalPriceTest() {
-        form.getDepartureAirport().sendKeys("Addis Ababa (ADD), Ethiopia");
-        form.getArrivalAirport().sendKeys("Bahar Dar (BJR), Ethiopia");
-        form.oneWay();
-        form.clickCalendar();
-        form.getDate().click();
-        form.clickSubmit();
-        form.setAccept();
-        form.setOffer(0);
-        double notExpectedAmount = form.getTotalPrice();
-        form.changeOrder();
-        form.setOffer(3);
-        assertNotEquals(notExpectedAmount,form.getTotalPrice(),1E-2);
-
-
-    }
-
-    @Test
     public void finalFormNotEmptyTest() {
         form.getDepartureAirport().sendKeys("Addis Ababa (ADD), Ethiopia");
         form.getArrivalAirport().sendKeys("Bahar Dar (BJR), Ethiopia");
@@ -152,9 +140,30 @@ public class BookingPageTest {
         form.clickSubmit();
         form.setAccept();
         form.setOffer(0);
+        form.clickSelectOffer(0);
+        form.waitPrice();
         form.clickContinue();
+        form.waitFinalForm();
         form.clickContinue();
         WebElement input = form.getInputField();
         assertTrue(Arrays.asList(input.getAttribute("class").split(" ")).contains("field-error"));
+    }
+
+    @Test
+    public void totalPriceTest() {
+        form.getDepartureAirport().sendKeys("Addis Ababa (ADD), Ethiopia");
+        form.getArrivalAirport().sendKeys("Bahar Dar (BJR), Ethiopia");
+        form.oneWay();
+        form.clickCalendar();
+        form.getDate().click();
+        form.clickSubmit();
+        form.setAccept();
+        form.setOffer(0);
+        form.clickSelectOffer(0);
+        double notExpectedAmount = form.getTotalPrice();
+        form.changeOrder();
+        form.setOffer(3);
+        form.clickSelectOffer(3);
+        assertNotEquals(notExpectedAmount, form.getTotalPrice(), 1E-2);
     }
 }
