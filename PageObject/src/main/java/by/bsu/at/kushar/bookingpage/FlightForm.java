@@ -111,11 +111,8 @@ public class FlightForm {
     }
 
     public void clickSelectOffer(int i) {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new WebDriverWait(driver, 5).until(ExpectedConditions
+                .elementToBeClickable(getSelectButton(i)));
         getSelectButton(i).click();
     }
 
@@ -127,7 +124,7 @@ public class FlightForm {
         return driver.findElement(By.xpath("//*[@id=\"dxp-flight-offers-comparison-0-" + i + "\"]" +
                 "/td/table/tbody/tr[7]/td[2]/button"));
     }
-    //*[@id="dxp-flight-offers-comparison-0-3"]/td/table/tbody/tr[7]/td[2]/button
+
     public double getTotalPrice() {
         waitPrice();
         return Double.valueOf(driver.findElement(By.xpath("//*[@id=\"dxp-flight-selection-trip-total-content\"]" +
@@ -146,6 +143,9 @@ public class FlightForm {
     }
 
     public void clickContinue() {
+        new WebDriverWait(driver,5)
+                .until(ExpectedConditions.elementToBeClickable(By
+                        .xpath("//*[@id=\"dxp-page-navigation-continue-button\"]")));
         driver.findElement(By.xpath("//*[@id=\"dxp-page-navigation-continue-button\"]")).click();
     }
 
@@ -169,6 +169,6 @@ public class FlightForm {
     public void waitFinalForm() {
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions
-                        .visibilityOf(driver.findElement(By.xpath("//*[@id=\"passenger-item-ADT-1\"]/div[1]"))));
+                        .visibilityOf(driver.findElement(By.xpath("//*[@id=\"dxp-passenger-list\"]"))));
     }
 }
