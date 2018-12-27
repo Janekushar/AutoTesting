@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class FlightForm {
     private WebDriver driver;
 
@@ -105,15 +107,27 @@ public class FlightForm {
     }
 
     public void setOffer(int i) {
+        sleep();
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.visibilityOf(getSelectOffer(i)));
         getSelectOffer(i).click();
     }
 
     public void clickSelectOffer(int i) {
+        sleep();
         new WebDriverWait(driver, 5).until(ExpectedConditions
                 .elementToBeClickable(getSelectButton(i)));
-        getSelectButton(i).click();
+        try {
+            getSelectButton(i).click();
+        } catch (Exception e) {
+//            something
+        }
+        sleep();
+        try {
+            getSelectButton(i).click();
+        } catch (Exception e) {
+//            something
+        }
     }
 
     private WebElement getSelectOffer(int i) {
@@ -133,6 +147,7 @@ public class FlightForm {
     }
 
     public void waitPrice() {
+        sleep();
         new WebDriverWait(driver, 6)
                 .until(ExpectedConditions.visibilityOf(driver
                         .findElement(By.xpath("//*[@id=\"dxp-flight-selection-trip-total-content\"]/div"))));
@@ -143,18 +158,18 @@ public class FlightForm {
     }
 
     public void clickContinue() {
-        new WebDriverWait(driver,5)
-                .until(ExpectedConditions.elementToBeClickable(By
-                        .xpath("//*[@id=\"dxp-page-navigation-continue-button\"]")));
+        sleep();
         driver.findElement(By.xpath("//*[@id=\"dxp-page-navigation-continue-button\"]")).click();
     }
 
 
     public void setAccept() {
+        sleep();
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions
                         .visibilityOf(driver.findElement(By.xpath("//*[@id=\"specialFareModal\"]/div/div"))));
         driver.findElement(By.xpath("//*[@id=\"specialFareModal\"]/div/div/div[2]/div[2]/label[1]")).click();
+        sleep();
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.
                         attributeToBe(By.xpath("//*[@id=\"ethiopian\"]"), "value", "YES"));
@@ -170,5 +185,12 @@ public class FlightForm {
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions
                         .visibilityOf(driver.findElement(By.xpath("//*[@id=\"dxp-passenger-list\"]"))));
+    }
+
+    private void sleep() {
+        long timeout = 30;
+        driver.manage().timeouts().setScriptTimeout(timeout, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS);
     }
 }
