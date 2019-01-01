@@ -116,7 +116,6 @@ public class FlightForm {
 
 
     public double getTotalPrice() {
-        waitCart();
         waitPrice();
         return Double.valueOf(driver.byXpath(getTotalPriceXpath())
                 .getText().replace(',', '.'));
@@ -129,7 +128,7 @@ public class FlightForm {
 
     public void waitCart() {
         driver.sleep();
-        driver.waitDisable(driver.byClassName(getCartClass()));
+        driver.waitDisable(driver.byID(getCartId()));
     }
 
     public void changeOrder() {

@@ -97,8 +97,4 @@ public class HomePage {
     public static String getLanguageSelectorClass(){
         return "dropdown-toggle";
     }
-
-    public static String getCartClass() {
-        return "dxp-summary-bar-container-cart-spinner";
-    }
 }

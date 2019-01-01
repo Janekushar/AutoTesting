@@ -72,11 +72,6 @@ public class Driver {
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void waitDisable(WebElement element) {
-        new WebDriverWait(driver, 60)
-                .until(ExpectedConditions.invisibilityOf(element));
-    }
-
     public void sleep() {
         long timeout = 30;
         driver.manage().timeouts().setScriptTimeout(timeout, TimeUnit.SECONDS);
