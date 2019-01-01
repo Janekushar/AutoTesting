@@ -99,6 +99,6 @@ public class HomePage {
     }
 
     public static String getCartClass() {
-        return "dxp-summary-bar-container-total-price";
+        return "dxp-summary-bar-container-cart-spinner";
     }
 }
