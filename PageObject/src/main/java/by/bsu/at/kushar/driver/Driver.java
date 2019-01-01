@@ -62,15 +62,8 @@ public class Driver {
     }
 
     public void wait(WebElement element) {
-        new WebDriverWait(driver, 5)
+        new WebDriverWait(driver, 30)
                 .until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public void waitAttribute(WebElement element, String attribute, String  value) {
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.
-                        attributeToBe(element, attribute, value));
-
     }
 
     public void sleep() {
