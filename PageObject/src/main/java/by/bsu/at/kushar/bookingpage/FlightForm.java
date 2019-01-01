@@ -133,7 +133,16 @@ public class FlightForm {
     public void clickContinue() {
         driver.sleep();
         driver.waitClickable(driver.byXpath(getContinueXpath()));
-        driver.clickByXpath(getContinueXpath());
+        try {
+            driver.clickByXpath(getContinueXpath());
+        } catch (Exception e) {
+//
+        }
+        try {
+            driver.clickByXpath(getContinueXpath());
+        } catch (Exception e) {
+//
+        }
     }
 
     public WebElement getInputField() {
