@@ -1,8 +1,9 @@
 package by.bsu.at.kushar.bookingpage;
 
+import static by.bsu.at.kushar.page.HomePage.*;
+
 import by.bsu.at.kushar.driver.Driver;
 import org.openqa.selenium.WebElement;
-import java.lang.Thread;
 
 public class FlightForm {
     private Driver driver;
@@ -12,41 +13,31 @@ public class FlightForm {
     }
 
     public void disebleTab() {
-        driver.clickByXpath("//*[@id=\"no-stopover\"]");
+        driver.clickByXpath(getDisableTadXpath());
     }
 
     public WebElement getDepartureAirport() {
-        return driver.byID("departureAirport");
+        return driver.byID(getDepartureAirportId());
     }
 
     public WebElement getArrivalAirport() {
-        return driver.byID("arrivalAirport");
+        return driver.byID(getArrivalAirportId());
     }
 
     public void clickSubmit() {
-        driver.clickByID("submit-book");
+        driver.clickByID(getSubmitId());
     }
 
     public void oneWay() {
-        driver.clickByXpath("//*[@id=\"book-form\"]/div[1]/ul/li[1]");
+        driver.clickByXpath(getOneWayXpath());
     }
 
-    public void clickCalendar() {
-        driver.clickByXpath("//*[@id=\"book-form\"]/div[2]/ul/li[3]/div/label[1]");
+    public void clickCalendar(int i) {
+        driver.clickByXpath(getCalendarXpath(i));
     }
 
-    public WebElement getDate() {
-        return driver.byXpath("//*[@id=\"book-form\"]" +
-                "/div[2]/ul/div/div[3]/div/div/div/div[2]/div[2]/table/tbody/tr[4]/td[6]/a");
-    }
-
-    public void clickSecondCalendar() {
-        driver.clickByXpath("//*[@id=\"book-form\"]/div[2]/ul/li[3]/div/label[2]");
-    }
-
-    public WebElement getSecondDate() {
-        return driver.byXpath("//*[@id=\"book-form\"]" +
-                "/div[2]/ul/div/div[3]/div/div/div/div[2]/div[2]/table/tbody/tr[3]/td[4]/a");
+    public WebElement getDate(int i, int j) {
+        return driver.byXpath(getDateXpath(i, j));
     }
 
     public int[] getFligthDates() {
@@ -55,49 +46,43 @@ public class FlightForm {
     }
 
     private WebElement getCurrentDate(int i) {
-        return driver.byXpath("//*[@id=\"book-form\"]" +
-                "/div[2]/ul/li[3]/div/label[" + i + "]/label/span[2]");
+        return driver.byXpath(getCurrentDateXpath(i));
     }
 
     public void selectPassengers() {
-        driver.clickByXpath("//*[@id=\"passcntbtn\"]");
+        driver.clickByXpath(getSelectPassengersXpath());
     }
 
     public void addAdult() {
-        driver.clickByXpath("//*[@id=\"passcntpop\"]/ul/li[2]/div[3]/button[2]");
+        driver.clickByXpath(getChangePassengersXpath(2, 2));
     }
 
     public void addChild() {
-        driver.clickByXpath("//*[@id=\"passcntpop\"]/ul/li[3]/div[3]/button[2]");
+        driver.clickByXpath(getChangePassengersXpath(3, 2));
     }
 
     public void addInfant() {
-        driver.clickByXpath("//*[@id=\"passcntpop\"]/ul/li[4]/div[3]/button[2]");
+        driver.clickByXpath(getChangePassengersXpath(4, 2));
     }
 
     public void minusAdult() {
-        driver.clickByXpath("//*[@id=\"passcntpop\"]" +
-                "/ul/li[2]/div[3]/button[1]");
+        driver.clickByXpath(getChangePassengersXpath(2, 1));
     }
 
     public int getAdultAmount() {
-        return Integer.valueOf(driver.byXpath("//*[@id=\"passcntpop\"]" +
-                "/ul/li[2]/div[1]/label").getText());
+        return Integer.valueOf(driver.byXpath(getPassengersAmountXpath(2)).getText());
     }
 
     public int getChildAmount() {
-        return Integer.valueOf(driver.byXpath("//*[@id=\"passcntpop\"]" +
-                "/ul/li[3]/div[1]/label").getText());
+        return Integer.valueOf(driver.byXpath(getPassengersAmountXpath(3)).getText());
     }
 
     public int getInfantAmount() {
-        return Integer.valueOf(driver.byXpath("//*[@id=\"passcntpop\"]" +
-                "/ul/li[4]/div[1]/label").getText());
+        return Integer.valueOf(driver.byXpath(getPassengersAmountXpath(4)).getText());
     }
 
     public String getAlertMessage() {
-        return driver.byXpath("//*[@id=\"dxp-shared-flight-selection\"]" +
-                "/div/div[1]/div/div/div/span[2]/span").getText();
+        return driver.byXpath(getAlertXpath()).getText();
     }
 
     public void setOffer(int i) {
@@ -122,48 +107,40 @@ public class FlightForm {
     }
 
     private WebElement getSelectOffer(int i) {
-        return driver.byXpath("//*[@id=\"offer-container-" + i + "-0\"]/button");
+        return driver.byXpath(getSelectOfferXpath(i));
     }
 
     private WebElement getSelectButton(int j) {
-        return driver.byXpath("//*[@id=\"dxp-flight-offers-comparison-0-0\"]" +
-                "/td/table/tbody/tr[7]/td["+j+"]/button");
+        return driver.byXpath(getSelectButtonXpath(j));
     }
 
 
     public double getTotalPrice() {
         waitPrice();
-        return Double.valueOf(driver.byXpath("//*[@id=\"dxp-flight-selection-trip-total-content\"]" +
-                "/div/table/tbody[2]/tr/td[2]/span/div/span/span/span[1]/span")
+        return Double.valueOf(driver.byXpath(getTotalPriceXpath())
                 .getText().replace(',', '.'));
     }
 
     public void waitPrice() {
         driver.sleep();
-        driver.wait(driver.byXpath("//*[@id=\"dxp-flight-selection-trip-total-content\"]/div"));
+        driver.wait(driver.byXpath(getTotalPriceXpath()));
     }
 
     public void changeOrder() {
-        driver.clickByXpath("//*[@id=\"dxp-selected-flight-0\"]/div/div/div[2]/button[2]");
+        driver.clickByXpath(getChaneOrderXpath());
     }
 
     public void clickContinue() {
         driver.sleep();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        driver.waitClickable(driver.byXpath("//*[@id=\"dxp-page-navigation-continue-button\"]"));
-        driver.clickByXpath("//*[@id=\"dxp-page-navigation-continue-button\"]");
+        driver.waitClickable(driver.byXpath(getContinueXpath()));
+        driver.clickByXpath(getContinueXpath());
     }
 
     public WebElement getInputField() {
-        return driver.byXpath("//*[@id=\"passenger-item-ADT-1-basic-info\"]" +
-                "/div/div[1]/div[2]/div");
+        return driver.byXpath(getInputFieldXpath());
     }
 
     public void waitFinalForm() {
-        driver.wait(driver.byXpath("//*[@id=\"dxp-passenger-list\"]"));
+        driver.wait(driver.byXpath(getFinalFormXpath()));
     }
 }

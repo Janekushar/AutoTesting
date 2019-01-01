@@ -12,11 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 public class BookingPageTest {
     private static Driver driver;
@@ -64,8 +61,8 @@ public class BookingPageTest {
         form.getDepartureAirport().sendKeys("Aarhus (AAR), Denmark");
         form.getArrivalAirport().sendKeys("Aarhus (AAR), Denmark");
         form.oneWay();
-        form.clickCalendar();
-        form.getDate().click();
+        form.clickCalendar(1);
+        form.getDate(4,6).click();
         form.clickSubmit();
         form.disebleTab();
         String expectedMess = "We couldn't find any available schedules that meet your criteria. " +
@@ -75,12 +72,12 @@ public class BookingPageTest {
 
     @Test
     public void dateSelectTest() {
-        form.clickSecondCalendar();
-        WebElement secondDate = form.getSecondDate();
-        WebElement firstDate = form.getDate();
+        form.clickCalendar(2);
+        WebElement secondDate = form.getDate(3,4);
+        WebElement firstDate = form.getDate(4,6);
         secondDate.click();
         firstDate.click();
-        form.clickSecondCalendar();
+        form.clickCalendar(2);
         int[] expected = {Integer.valueOf(secondDate.getText()), Integer.valueOf(firstDate.getText())};
         assertArrayEquals(expected, form.getFligthDates());
     }
@@ -135,8 +132,8 @@ public class BookingPageTest {
         form.getDepartureAirport().sendKeys("Addis Ababa (ADD), Ethiopia");
         form.getArrivalAirport().sendKeys("Paris De Gaulle (CDG), France");
         form.oneWay();
-        form.clickCalendar();
-        form.getDate().click();
+        form.clickCalendar(1);
+        form.getDate(4,6).click();
         form.clickSubmit();
         form.setOffer(0);
         form.clickSelectOffer(2);
@@ -153,8 +150,8 @@ public class BookingPageTest {
         form.getDepartureAirport().sendKeys("Addis Ababa (ADD), Ethiopia");
         form.getArrivalAirport().sendKeys("Paris De Gaulle (CDG), France");
         form.oneWay();
-        form.clickCalendar();
-        form.getDate().click();
+        form.clickCalendar(1);
+        form.getDate(4,6).click();
         form.clickSubmit();
         form.setOffer(0);
         form.clickSelectOffer(2);
