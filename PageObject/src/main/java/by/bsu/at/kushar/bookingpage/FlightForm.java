@@ -101,15 +101,11 @@ public class FlightForm {
 
     public void setOffer(int i) {
         driver.sleep();
-        driver.sleep();
-        driver.sleep();
         driver.wait(getSelectOffer(i));
         getSelectOffer(i).click();
     }
 
     public void clickSelectOffer(int j) {
-        driver.sleep();
-        driver.sleep();
         driver.sleep();
         driver.wait(getSelectButton(j));
         try {
@@ -143,8 +139,6 @@ public class FlightForm {
 
     public void waitPrice() {
         driver.sleep();
-        driver.sleep();
-        driver.sleep();
         driver.wait(driver.byXpath("//*[@id=\"dxp-flight-selection-trip-total-content\"]/div"));
     }
 
@@ -154,9 +148,7 @@ public class FlightForm {
 
     public void clickContinue() {
         driver.sleep();
-        driver.sleep();
-        driver.sleep();
-        driver.wait(driver.byXpath("//*[@id=\"dxp-page-navigation-continue-button\"]"));
+        driver.waitClickable(driver.byXpath("//*[@id=\"dxp-page-navigation-continue-button\"]"));
         driver.clickByXpath("//*[@id=\"dxp-page-navigation-continue-button\"]");
     }
 
