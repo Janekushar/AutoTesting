@@ -2,6 +2,8 @@ package by.bsu.at.kushar.homepage;
 
 import by.bsu.at.kushar.driver.Driver;
 
+import static by.bsu.at.kushar.page.HomePage.*;
+
 public class LanguageAndRegion {
     private Driver driver;
 
@@ -10,14 +12,14 @@ public class LanguageAndRegion {
     }
 
     public void openLanguageSelector() {
-        driver.clickByClassName("dropdown-toggle");
+        driver.clickByClassName(getLanguageSelectorClass());
     }
 
-    public void selectLanguage() {
-        driver.clickByXpath("//*[@id=\"language\"]/option[4]");
+    public void selectLanguage(int i) {
+        driver.clickByXpath(getLanguageXpath(i));
     }
 
     public void changeLanguage() {
-        driver.clickByXpath("//*[@id=\"searchForm\"]/input");
+        driver.clickByXpath(getChaneLanguageXpath());
     }
 }

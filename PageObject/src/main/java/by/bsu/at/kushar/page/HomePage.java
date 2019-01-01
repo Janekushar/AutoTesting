@@ -54,6 +54,10 @@ public class HomePage {
                 "/div/table/tbody[2]/tr/td[2]/span/div/span/span/span[1]/span";
     }
 
+    public static String getTotalPriceTableXpath(){
+        return "//*[@id=\"dxp-flight-selection-trip-total-content\"]/div";
+    }
+
     public static String getChaneOrderXpath() {
         return "//*[@id=\"dxp-selected-flight-0\"]/div/div/div[2]/button[2]";
     }
@@ -71,6 +75,13 @@ public class HomePage {
         return "//*[@id=\"dxp-passenger-list\"]";
     }
 
+    public static String getLanguageXpath(int i) {
+        return "//*[@id=\"language\"]/option["+i+"]";
+    }
+    public static String getChaneLanguageXpath(){
+        return "//*[@id=\"searchForm\"]/input";
+    }
+
     public static String getDepartureAirportId() {
         return "departureAirport";
     }
@@ -81,5 +92,9 @@ public class HomePage {
 
     public static String getSubmitId() {
         return "submit-book";
+    }
+
+    public static String getLanguageSelectorClass(){
+        return "dropdown-toggle";
     }
 }

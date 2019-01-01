@@ -45,10 +45,6 @@ public class Driver {
         driver.findElement(By.xpath(xpath)).click();
     }
 
-    public WebElement byClassName(String className) {
-        return driver.findElement(By.className(className));
-    }
-
     public void clickByClassName(String className) {
         driver.findElement(By.className(className)).click();
     }

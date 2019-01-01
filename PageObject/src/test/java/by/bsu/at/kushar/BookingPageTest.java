@@ -22,8 +22,6 @@ public class BookingPageTest {
     @BeforeClass
     public static void setUpChromeDriver() {
         driver = new Driver("https://www.ethiopianairlines.com/AA/EN");
-//        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-//        driver = new ChromeDriver();
         form = new FlightForm(driver);
     }
 
@@ -42,7 +40,7 @@ public class BookingPageTest {
     public void changeRegionTest() {
         LanguageAndRegion lar = new LanguageAndRegion(driver);
         lar.openLanguageSelector();
-        lar.selectLanguage();
+        lar.selectLanguage(4);
         lar.changeLanguage();
         String currUrl = "https://www.ethiopianairlines.com/AA/DE/";
         assertEquals(currUrl, driver.getCurrentURL());
