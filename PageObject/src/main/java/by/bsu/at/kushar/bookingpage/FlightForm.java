@@ -108,12 +108,16 @@ public class FlightForm {
 
     public void setOffer(int i) {
         sleep();
+        sleep();
+        sleep();
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.visibilityOf(getSelectOffer(i)));
         getSelectOffer(i).click();
     }
 
     public void clickSelectOffer(int i) {
+        sleep();
+        sleep();
         sleep();
         new WebDriverWait(driver, 5).until(ExpectedConditions
                 .elementToBeClickable(getSelectButton(i)));
@@ -147,6 +151,8 @@ public class FlightForm {
 
     public void waitPrice() {
         sleep();
+        sleep();
+        sleep();
         new WebDriverWait(driver, 6)
                 .until(ExpectedConditions.visibilityOf(driver
                         .findElement(By.xpath("//*[@id=\"dxp-flight-selection-trip-total-content\"]/div"))));
@@ -158,16 +164,22 @@ public class FlightForm {
 
     public void clickContinue() {
         sleep();
+        sleep();
+        sleep();
         driver.findElement(By.xpath("//*[@id=\"dxp-page-navigation-continue-button\"]")).click();
     }
 
 
     public void setAccept() {
         sleep();
+        sleep();
+        sleep();
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions
                         .visibilityOf(driver.findElement(By.xpath("//*[@id=\"specialFareModal\"]/div/div"))));
         driver.findElement(By.xpath("//*[@id=\"specialFareModal\"]/div/div/div[2]/div[2]/label[1]")).click();
+        sleep();
+        sleep();
         sleep();
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.
