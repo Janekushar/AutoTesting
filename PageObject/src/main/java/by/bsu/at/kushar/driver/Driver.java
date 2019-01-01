@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -45,6 +46,10 @@ public class Driver {
         driver.findElement(By.xpath(xpath)).click();
     }
 
+    public WebElement byClassName(String className) {
+        return driver.findElement(By.className(className));
+    }
+
     public void clickByClassName(String className) {
         driver.findElement(By.className(className)).click();
     }
@@ -63,7 +68,8 @@ public class Driver {
     }
 
     public void waitClickable(WebElement element) {
-        new WebDriverWait(driver,60).until(ExpectedConditions.elementToBeClickable(element));
+        new WebDriverWait(driver, 60)
+                .until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void sleep() {
