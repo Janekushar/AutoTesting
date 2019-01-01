@@ -2,6 +2,7 @@ package by.bsu.at.kushar.bookingpage;
 
 import by.bsu.at.kushar.driver.Driver;
 import org.openqa.selenium.WebElement;
+import java.lang.Thread;
 
 public class FlightForm {
     private Driver driver;
@@ -148,6 +149,11 @@ public class FlightForm {
 
     public void clickContinue() {
         driver.sleep();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.waitClickable(driver.byXpath("//*[@id=\"dxp-page-navigation-continue-button\"]"));
         driver.clickByXpath("//*[@id=\"dxp-page-navigation-continue-button\"]");
     }
