@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 
 import by.bsu.at.kushar.bookingpage.FlightForm;
+import by.bsu.at.kushar.driver.Driver;
 import by.bsu.at.kushar.homepage.LanguageAndRegion;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,27 +13,26 @@ import org.junit.Test;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class BookingPageTest {
-    private static WebDriver driver;
+    private static Driver driver;
     private static FlightForm form;
 
     @BeforeClass
-    public static void setUpChromeDriver() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+    public static void setUpChromeDriver() {
+        driver = new Driver("https://www.ethiopianairlines.com/AA/EN");
+//        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+//        driver = new ChromeDriver();
         form = new FlightForm(driver);
-        driver.navigate().to("https://www.ethiopianairlines.com/AA/EN");
     }
 
     @Before
     public void setUpUrl() {
-        driver.navigate().to("https://www.ethiopianairlines.com/AA/EN");
+        driver.navigateTo("https://www.ethiopianairlines.com/AA/EN");
     }
 
     @AfterClass
@@ -48,7 +48,7 @@ public class BookingPageTest {
         lar.selectLanguage();
         lar.changeLanguage();
         String currUrl = "https://www.ethiopianairlines.com/AA/DE/";
-        assertEquals(currUrl, driver.getCurrentUrl());
+        assertEquals(currUrl, driver.getCurrentURL());
     }
 
     @Test
@@ -133,14 +133,13 @@ public class BookingPageTest {
     @Test
     public void finalFormNotEmptyTest() {
         form.getDepartureAirport().sendKeys("Addis Ababa (ADD), Ethiopia");
-        form.getArrivalAirport().sendKeys("Bahar Dar (BJR), Ethiopia");
+        form.getArrivalAirport().sendKeys("Paris De Gaulle (CDG), France");
         form.oneWay();
         form.clickCalendar();
         form.getDate().click();
         form.clickSubmit();
-        form.setAccept();
         form.setOffer(0);
-        form.clickSelectOffer(0);
+        form.clickSelectOffer(2);
         form.waitPrice();
         form.clickContinue();
         form.waitFinalForm();
@@ -152,18 +151,17 @@ public class BookingPageTest {
     @Test
     public void totalPriceTest() {
         form.getDepartureAirport().sendKeys("Addis Ababa (ADD), Ethiopia");
-        form.getArrivalAirport().sendKeys("Bahar Dar (BJR), Ethiopia");
+        form.getArrivalAirport().sendKeys("Paris De Gaulle (CDG), France");
         form.oneWay();
         form.clickCalendar();
         form.getDate().click();
         form.clickSubmit();
-        form.setAccept();
         form.setOffer(0);
-        form.clickSelectOffer(0);
+        form.clickSelectOffer(2);
         double notExpectedAmount = form.getTotalPrice();
         form.changeOrder();
-        form.setOffer(3);
-        form.clickSelectOffer(3);
+        form.setOffer(1);
+        form.clickSelectOffer(2);
         assertNotEquals(notExpectedAmount, form.getTotalPrice(), 1E-2);
     }
 }

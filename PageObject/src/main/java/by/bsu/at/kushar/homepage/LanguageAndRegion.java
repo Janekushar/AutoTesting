@@ -1,24 +1,23 @@
 package by.bsu.at.kushar.homepage;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import by.bsu.at.kushar.driver.Driver;
 
 public class LanguageAndRegion {
-    private WebDriver driver;
+    private Driver driver;
 
-    public LanguageAndRegion(WebDriver driver) {
+    public LanguageAndRegion(Driver driver) {
         this.driver = driver;
     }
 
     public void openLanguageSelector() {
-        driver.findElement(By.className("dropdown-toggle")).click();
+        driver.clickByClassName("dropdown-toggle");
     }
 
     public void selectLanguage() {
-        driver.findElement(By.xpath("//*[@id=\"language\"]/option[4]")).click();
+        driver.clickByXpath("//*[@id=\"language\"]/option[4]");
     }
 
     public void changeLanguage() {
-        driver.findElement(By.xpath("//*[@id=\"searchForm\"]/input")).click();
+        driver.clickByXpath("//*[@id=\"searchForm\"]/input");
     }
 }
