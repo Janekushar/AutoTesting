@@ -138,7 +138,8 @@ public class FlightForm {
     }
 
     private WebElement getSelectButton(int i) {
-        return driver.findElement(By.className("offer-select-button"));
+        return driver.findElement(By.xpath("//*[@id=\"dxp-flight-offers-comparison-0-" + i + "\"]" +
+                "/td/table/tbody/tr[7]/td[2]/button"));
     }
 
     public double getTotalPrice() {
@@ -183,9 +184,6 @@ public class FlightForm {
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.
                         attributeToBe(By.xpath("//*[@id=\"ethiopian\"]"), "value", "YES"));
-        sleep();
-        sleep();
-        sleep();
         driver.findElement(By.xpath("//*[@id=\"submit-btn\"]")).click();
     }
 

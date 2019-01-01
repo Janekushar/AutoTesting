@@ -24,6 +24,7 @@ public class BookingPageTest {
     public static void setUpChromeDriver() throws Exception {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         form = new FlightForm(driver);
         driver.navigate().to("https://www.ethiopianairlines.com/AA/EN");
