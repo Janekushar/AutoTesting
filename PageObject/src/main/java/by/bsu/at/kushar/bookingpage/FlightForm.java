@@ -156,6 +156,7 @@ public class FlightForm {
         driver.sleep();
         driver.sleep();
         driver.sleep();
+        driver.wait(driver.byXpath("//*[@id=\"dxp-page-navigation-continue-button\"]"));
         driver.clickByXpath("//*[@id=\"dxp-page-navigation-continue-button\"]");
     }
 
