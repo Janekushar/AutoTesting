@@ -129,7 +129,7 @@ public class FlightForm {
 
     public void waitCart() {
         driver.sleep();
-        while (driver.byClassName(getCartClass()).getAttribute("class").contains("empty"));
+        driver.waitDisable(driver.byClassName(getCartClass()));
     }
 
     public void changeOrder() {
