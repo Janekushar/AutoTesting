@@ -14,7 +14,7 @@ public class Driver {
 
     public Driver() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(65, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
@@ -24,7 +24,7 @@ public class Driver {
 
     public Driver(String url) {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(65, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         navigateTo(url);
     }
@@ -58,12 +58,12 @@ public class Driver {
     }
 
     public void wait(WebElement element) {
-        new WebDriverWait(driver, 30)
+        new WebDriverWait(driver, 60)
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
     public void waitClickable(WebElement element) {
-        new WebDriverWait(driver,30).until(ExpectedConditions.elementToBeClickable(element));
+        new WebDriverWait(driver,60).until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void sleep() {
