@@ -122,7 +122,6 @@ public class FlightForm {
         } catch (Exception e) {
 //            something
         }
-        sleep();
         try {
             getSelectButton(i).click();
         } catch (Exception e) {
