@@ -11,6 +11,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
+    static {
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+    }
+
     private WebDriver driver;
 
     public Driver() {
@@ -77,9 +81,5 @@ public class Driver {
         driver.manage().timeouts().setScriptTimeout(timeout, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS);
-    }
-
-    static {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
     }
 }

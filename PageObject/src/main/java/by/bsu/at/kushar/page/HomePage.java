@@ -54,7 +54,7 @@ public class HomePage {
                 "/div/table/tbody[2]/tr/td[2]/span/div/span/span/span[1]/span";
     }
 
-    public static String getTotalPriceTableXpath(){
+    public static String getTotalPriceTableXpath() {
         return "//*[@id=\"dxp-flight-selection-trip-total-content\"]/div";
     }
 
@@ -66,20 +66,26 @@ public class HomePage {
         return "//*[@id=\"dxp-page-navigation-continue-button\"]";
     }
 
-    public static String getInputFieldXpath(){
+    public static String getInputFieldXpath() {
         return "//*[@id=\"passenger-item-ADT-1-basic-info\"]" +
                 "/div/div[1]/div[2]/div";
     }
 
-    public static String getFinalFormXpath(){
+    public static String getFinalFormXpath() {
         return "//*[@id=\"dxp-passenger-list\"]";
     }
 
     public static String getLanguageXpath(int i) {
-        return "//*[@id=\"language\"]/option["+i+"]";
+        return "//*[@id=\"language\"]/option[" + i + "]";
     }
-    public static String getChaneLanguageXpath(){
+
+    public static String getChaneLanguageXpath() {
         return "//*[@id=\"searchForm\"]/input";
+    }
+
+    public static String getInputFinalForm(){
+        return "//*[@id=\"firstNamePassengerItemAdt1BasicInfoEditFirstName" +
+                "-passenger-item-ADT-1-basic-info-edit,firstName\"]";
     }
 
     public static String getDepartureAirportId() {
@@ -94,7 +100,7 @@ public class HomePage {
         return "submit-book";
     }
 
-    public static String getLanguageSelectorClass(){
+    public static String getLanguageSelectorClass() {
         return "dropdown-toggle";
     }
 }

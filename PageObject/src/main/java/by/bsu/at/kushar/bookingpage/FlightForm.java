@@ -149,5 +149,6 @@ public class FlightForm {
 
     public void waitFinalForm() {
         driver.wait(driver.byXpath(getFinalFormXpath()));
+        driver.wait(driver.byXpath(getInputFinalForm()));
     }
 }
