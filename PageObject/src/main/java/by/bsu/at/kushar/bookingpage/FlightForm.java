@@ -86,24 +86,25 @@ public class FlightForm {
     }
 
     public void setOffer(int i) {
-        driver.sleep();
+//        driver.sleep();
         driver.wait(getSelectOffer(i));
         getSelectOffer(i).click();
     }
 
     public void clickSelectOffer(int j) {
-        driver.sleep();
+//        driver.sleep();
         driver.wait(getSelectButton(j));
-        try {
+        driver.scrollDown();
+//        try {
             getSelectButton(j).click();
-        } catch (Exception e) {
+//        } catch (Exception e) {
 //            something
-        }
-        try {
-            getSelectButton(j).click();
-        } catch (Exception e) {
-//            something
-        }
+//        }
+//        try {
+//            getSelectButton(j).click();
+//        } catch (Exception e) {
+////            something
+//        }
     }
 
     private WebElement getSelectOffer(int i) {
@@ -122,7 +123,7 @@ public class FlightForm {
     }
 
     public void waitPrice() {
-        driver.sleep();
+//        driver.sleep();
         driver.wait(driver.byXpath(getTotalPriceTableXpath()));
     }
 
@@ -132,14 +133,13 @@ public class FlightForm {
     }
 
     public void clickableContinue() {
-        driver.sleep();
+//        driver.sleep();
         driver.waitClickable(driver.byXpath(getContinueXpath()));
     }
 
     public void clickContinue() {
-        driver.sleep();
+//        driver.sleep();
         driver.waitClickable(driver.byXpath(getContinueXpath()));
-        for(long i=0;i<1000000L;i++);
         driver.clickByXpath(getContinueXpath());
     }
 
