@@ -1,9 +1,11 @@
 package by.bsu.at.kushar.driver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,8 +21,9 @@ public class Driver {
 
     public Driver() {
         driver = new ChromeDriver();
+        new ChromeOptions().addArguments("--window-size=1920,1080");
         driver.manage().timeouts().implicitlyWait(85, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
     }
 
     public void navigateTo(String url) {
@@ -29,8 +32,9 @@ public class Driver {
 
     public Driver(String url) {
         driver = new ChromeDriver();
+        new ChromeOptions().addArguments("--window-size=1920,1080");
         driver.manage().timeouts().implicitlyWait(85, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
         navigateTo(url);
     }
 
@@ -74,6 +78,11 @@ public class Driver {
     public void waitClickable(WebElement element) {
         new WebDriverWait(driver, 80)
                 .until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void scroll(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1000)");
     }
 
     public void sleep() {
