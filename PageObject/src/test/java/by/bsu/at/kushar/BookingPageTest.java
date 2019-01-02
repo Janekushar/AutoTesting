@@ -136,6 +136,7 @@ public class BookingPageTest {
         form.setOffer(0);
         form.clickSelectOffer(2);
         form.waitPrice();
+        form.clickableContinue();
         form.clickContinue();
         form.clickContinue();
         form.waitFinalForm();
