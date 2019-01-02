@@ -136,11 +136,13 @@ public class BookingPageTest {
         form.setOffer(0);
         form.clickSelectOffer(2);
         form.waitPrice();
-        form.clickContinue();
-        try {
-            form.clickSubmit();
-        }catch (Exception e){
-            //
+        String url=driver.getCurrentURL();
+        while (url.equals(driver.getCurrentURL())) {
+            try {
+                form.clickContinue();
+            } catch (Exception e) {
+                //
+            }
         }
         form.waitFinalForm();
         form.clickContinue();
