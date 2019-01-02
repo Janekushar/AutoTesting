@@ -141,6 +141,7 @@ public class BookingPageTest {
         form.clickContinue();
         form.waitFinalForm();
         form.clickContinue();
+        form.clickContinue();
         WebElement input = form.getInputField();
         assertTrue(Arrays.asList(input.getAttribute("class").split(" ")).contains("field-error"));
     }

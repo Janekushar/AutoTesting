@@ -138,6 +138,8 @@ public class FlightForm {
 
     public void clickContinue() {
         driver.sleep();
+        driver.waitClickable(driver.byXpath(getContinueXpath()));
+        for(long i=0;i<1000000L;i++);
         driver.clickByXpath(getContinueXpath());
     }
 
