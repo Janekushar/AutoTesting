@@ -126,10 +126,6 @@ public class FlightForm {
         driver.wait(driver.byXpath(getTotalPriceTableXpath()));
     }
 
-    public void waitCart() {
-        driver.sleep();
-        driver.waitDisable(driver.byID(getCartId()));
-    }
 
     public void changeOrder() {
         driver.clickByXpath(getChaneOrderXpath());
