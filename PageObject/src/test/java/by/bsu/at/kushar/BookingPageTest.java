@@ -134,7 +134,6 @@ public class BookingPageTest {
         form.getDate(4,6).click();
         form.clickSubmit();
         form.setOffer(0);
-        driver.scrollDown();
         form.clickSelectOffer(2);
         form.waitPrice();
         driver.scrollDown();
@@ -158,14 +157,12 @@ public class BookingPageTest {
         form.getDate(4,6).click();
         form.clickSubmit();
         form.setOffer(0);
-        driver.scrollDown();
         form.clickSelectOffer(2);
         driver.scrollDown();
         double notExpectedAmount = form.getTotalPrice();
         driver.scrollUp();
         form.changeOrder();
         form.setOffer(1);
-        driver.scrollDown();
         form.clickSelectOffer(2);
         assertNotEquals(notExpectedAmount, form.getTotalPrice(), 1E-2);
     }
