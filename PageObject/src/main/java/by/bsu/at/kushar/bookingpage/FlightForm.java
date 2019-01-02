@@ -123,8 +123,8 @@ public class FlightForm {
 
     public void waitPrice() {
         driver.sleep();
+        for(long i=0;i<100000000L;i++);
         driver.wait(driver.byXpath(getTotalPriceTableXpath()));
-        for(int i=0;i<100000;i++);
     }
 
 
