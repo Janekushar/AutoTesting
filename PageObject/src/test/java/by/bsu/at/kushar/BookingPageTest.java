@@ -136,14 +136,8 @@ public class BookingPageTest {
         form.setOffer(0);
         form.clickSelectOffer(2);
         form.waitPrice();
-        String url=driver.getCurrentURL();
-        while (url.equals(driver.getCurrentURL())) {
-            try {
-                form.clickContinue();
-            } catch (Exception e) {
-                //
-            }
-        }
+        form.clickContinue();
+        form.clickContinue();
         form.waitFinalForm();
         form.clickContinue();
         WebElement input = form.getInputField();
