@@ -137,6 +137,11 @@ public class BookingPageTest {
         form.clickSelectOffer(2);
         form.waitPrice();
         form.clickContinue();
+        try {
+            form.clickSubmit();
+        }catch (Exception e){
+            //
+        }
         form.waitFinalForm();
         form.clickContinue();
         WebElement input = form.getInputField();
