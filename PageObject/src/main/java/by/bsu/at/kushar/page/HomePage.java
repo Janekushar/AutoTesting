@@ -58,7 +58,7 @@ public class HomePage {
         return "//*[@id=\"dxp-flight-selection-trip-total-content\"]/div";
     }
 
-    public static String getChaneOrderXpath() {
+    public static String getChangeOrderXpath() {
         return "//*[@id=\"dxp-selected-flight-0\"]/div/div/div[2]/button[2]";
     }
 

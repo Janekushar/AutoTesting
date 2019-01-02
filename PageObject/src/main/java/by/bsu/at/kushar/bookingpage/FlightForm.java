@@ -131,7 +131,7 @@ public class FlightForm {
 
 
     public void changeOrder() {
-        driver.clickByXpath(getChaneOrderXpath());
+        driver.clickByXpath(getChangeOrderXpath());
     }
 
     public void clickContinue() {
