@@ -136,10 +136,12 @@ public class BookingPageTest {
         form.setOffer(0);
         form.clickSelectOffer(2);
         form.waitPrice();
+        driver.scrollDown();
         form.clickableContinue();
         form.clickContinue();
         form.clickContinue();
         form.waitFinalForm();
+        driver.scrollDown();
         form.clickContinue();
         form.clickContinue();
         WebElement input = form.getInputField();
@@ -156,7 +158,9 @@ public class BookingPageTest {
         form.clickSubmit();
         form.setOffer(0);
         form.clickSelectOffer(2);
+        driver.scrollDown();
         double notExpectedAmount = form.getTotalPrice();
+        driver.scrollUp();
         form.changeOrder();
         form.setOffer(1);
         form.clickSelectOffer(2);

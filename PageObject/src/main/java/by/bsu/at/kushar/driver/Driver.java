@@ -80,10 +80,17 @@ public class Driver {
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void scroll(){
+    public void scrollDown(){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
     }
+
+    public void scrollUp(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,-1000)");
+    }
+
+
 
     public void sleep() {
         long timeout = 80;
